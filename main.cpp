@@ -24,26 +24,16 @@ using namespace std;
 #define LYRAND (double)rand()/RAND_MAX //LYRAND as given by Dr. Logan
 
 //Set up Grid world for the agents
-
-int WorldWidth;
-int WorldHeight;
+class GridWorld {
+    
+int WorldWidth = 15;
+int WorldHeight =15;
 int generation = 10,000;
 
-// update agent locations
-int agent1X;
-int agent2X;
-int agent1Y;
-int agent2Y;
-
-//starting agents location
-int agentStart1X;
-int agentStart1Y;
-int agentStart2X;
-int agentStart2Y;
 // initialize the goal for both agents
 int goalX;
 int goalY;
-
+};
 // Create agents and goal locations
 agent1X = rand()% gridHeight;
 agent1Y = rand()% gridWidth;
@@ -58,6 +48,28 @@ agentStart2Y = agent2Y;
 goalX = rand()% gridHeight;
 goalY = rand()% gridWidth;
 
+
+// Set up the Agents
+class Agents{
+public:
+// update agent locations
+int agent1X;
+int agent2X;
+int agent1Y;
+int agent2Y;
+
+//starting agents location
+int agentStart1X;
+int agentStart1Y;
+int agentStart2X;
+int agentStart2Y;
+
+    void state(int s);
+    int decide();
+    void react(double r);
+    void Qtableinit();
+};
+
 // If agents and goal or both agents are in same location change the locations
 while( agent1X == goalX && agent1Y == goalY ){
 
@@ -69,7 +81,7 @@ while( agent1X == goalX && agent1Y == goalY ){
 
         goalY = rand()% gridHeight;
         goalX= rand()% gridWidth;
-    }
+    };
 while( agent2X == goalX && agent2Y == goalY ){
 
         agent2X = rand()% gridWidth;
@@ -80,11 +92,16 @@ while( agent2X == goalX && agent2Y == goalY ){
 
         goalY = rand()% gridHeight;
         goalX= rand()% gridWidth;
-    }
+    };
+while( agent2X == agent1X && agent2Y == agent2Y ){
 
+        agent2X = rand()% gridWidth;
+        agent2Y = rand()% gridHeight;
+        agent1X = rand()% gridWidth;
+        agent1Y = rand()% gridHeight;
 
-// Set up the Agents
-class Agents {
-public:
-
-};
+        agentStart2X = agent2X;
+        agentStart2Y = agent2Y;
+        agentStart1X = agent1X;
+        agentStart1Y = agent1Y;
+    };
